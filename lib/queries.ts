@@ -1,12 +1,10 @@
 export const getBusiness = async (name: string) => {
   try {
     console.log(
-      `fetching from: ${process.env["NEXT_PUBLIC_API_URL"]}/api/business?business=${name}`
+      `fetching from: ${process.env["NEXT_PUBLIC_API_URL"]}/api/business/${name}`
     );
-    let business = await (
-      await fetch(
-        `${process.env["NEXT_PUBLIC_API_URL"]}/api/business?business=${name}`
-      )
+    let business = await(
+      await fetch(`${process.env["NEXT_PUBLIC_API_URL"]}/api/business/${name}`)
     )
       .json()
       .then((resp) => resp)
