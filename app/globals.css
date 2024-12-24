@@ -3,19 +3,67 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 6, 10, 12;
+  --background-rgb: 236, 236, 236;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 236, 236, 236;
+    --background-rgb: 6, 10, 12;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+.glass {
+  /* From https://css.glass */
+  /* background: rgba(0, 0, 0, 0.5); */
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* scrollbar style */ /* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-gray dark:bg-dark-muted;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-dark/85 dark:bg-light/85;
+}
+/* END: scrollbar style */
+
+.cl-avatarBox {
+  width: 2rem;
+  height: 2rem;
+}
+
+.ProseMirror {
+  @apply min-h-24;
+}
+
+.parseContent img {
+  @apply mb-2 rounded-lg;
 }
