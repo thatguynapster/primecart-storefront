@@ -28,6 +28,10 @@ const config = {
         warning: "#F79009",
         info: "#0055D6",
       },
+      fontFamily: {
+        inter: ["var(--font-inter)"],
+        rubik: ["var(--font-rubik)"],
+      },
       keyframes: {
         scale: {
           "0%": {
