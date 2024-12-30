@@ -24,8 +24,7 @@ const Navigation = async ({ }: Props) => {
           <p className="text-dark-muted text-sm font-semibold uppercase">best price guarantee</p>
         </div>
 
-        <div className="relative flex items-center py-2.5 justify-between">
-
+        <div className="relative flex items-center justify-between">
           <Sheet>
             <SheetTrigger asChild>
               <div className="lg:hidden px-4 py-2">
@@ -52,16 +51,16 @@ const Navigation = async ({ }: Props) => {
             </SheetContent>
           </Sheet>
 
-
-          <Image
-            src={'/img/logo.png'}
-            alt={"Business Name Logo"}
-            priority
-            width={96}
-            height={96}
-            sizes="(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw"
-            className="dark:hidden object-contain"
-          />
+          <div className="relative w-24 h-16">
+            <Image
+              src={'/img/logo.png'}
+              alt={"Business Name Logo"}
+              priority
+              fill
+              sizes="(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw"
+              className="dark:hidden object-contain mx-auto"
+            />
+          </div>
 
           <div className="px-4 py-2">
             <Popover>
