@@ -1,3 +1,4 @@
+import { routes } from "@/routes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -8,7 +9,7 @@ const Footer = (props: Props) => {
   return (
     <footer className="mx-auto w-full max-w-3xl lg:max-w-7xl flex flex-col lg:flex-row justify-between gap-6 px-4 py-8 lg:text-sm">
       <div className="flex flex-col gap-6">
-        <div className="relative w-32 h-24">
+        <Link href={routes.home} className="relative w-32 h-24">
           <Image
             src={'/img/logo.png'}
             alt={"Business Name Logo"}
@@ -17,7 +18,7 @@ const Footer = (props: Props) => {
             sizes="(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw"
             className="dark:hidden object-contain mx-auto"
           />
-        </div>
+        </Link>
 
         <p className="text-dark-muted">Your supplier to the world of limited editions with worldwide delivery</p>
       </div>

@@ -1,11 +1,11 @@
 import { Menu, ShoppingBag } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import clsx from "clsx";
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
-import { Label } from "@headlessui/react";
-import Link from "next/link";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
+import { routes } from "@/routes";
 
 type Props = {};
 
@@ -18,7 +18,7 @@ const navigation = [
 const Navigation = async ({ }: Props) => {
 
   return (
-    <div className="min-h-full sticky top-0 z-10 glass">
+    <div className="min-h-full sticky top-0 z-50 bg-white/50 glass">
       <div className="mx-auto max-w-3xl lg:max-w-7xl flex flex-col">
         <div className="flex items-center justify-center py-2.5">
           <p className="text-dark-muted text-sm font-semibold uppercase">best price guarantee</p>
@@ -51,7 +51,7 @@ const Navigation = async ({ }: Props) => {
             </SheetContent>
           </Sheet>
 
-          <div className="relative w-24 h-16">
+          <Link href={routes.home} className="relative w-24 h-16">
             <Image
               src={'/img/logo.png'}
               alt={"Business Name Logo"}
@@ -60,11 +60,11 @@ const Navigation = async ({ }: Props) => {
               sizes="(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw"
               className="dark:hidden object-contain mx-auto"
             />
-          </div>
+          </Link>
 
           <div className="px-4 py-2">
-            <Popover>
-              <PopoverTrigger asChild>
+            {/* <Popover>
+              <PopoverTrigger asChild className="cursor-pointer">
                 <ShoppingBag strokeWidth={1.5} />
               </PopoverTrigger>
 
@@ -78,7 +78,23 @@ const Navigation = async ({ }: Props) => {
                   </div>
                 </div>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
+
+            <Sheet>
+              <SheetTrigger asChild>
+                <div className="cursor-pointer p-2">
+                  <ShoppingBag strokeWidth={1.5} />
+                </div>
+
+              </SheetTrigger>
+              <SheetContent>
+                <SheetHeader>
+                  <SheetTitle className="sr-only">Cart</SheetTitle>
+                  <SheetDescription />
+                </SheetHeader>
+
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
 
