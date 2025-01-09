@@ -34,7 +34,7 @@ export const Slider = ({
     const lg = (width as number) < 1280;
     const xl = (width as number) < 1536;
 
-    const svp = base ? 2 : sm ? 2 : md ? 4 : lg ? 4 : xl ? 4 : 5;
+    const svp = base ? 2 : sm ? 2 : md ? 4 : lg ? 4 : xl ? 4 : 4;
 
     const [swiper, setSwiper] = useState<null | SwiperType>(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -48,7 +48,6 @@ export const Slider = ({
 
     useEffect(() => {
         swiper?.on("slideChange", ({ activeIndex }: { activeIndex: number }) => {
-            console.log(activeIndex)
             setActiveIndex(activeIndex);
             setSlideConfig({
                 isBeginning: activeIndex === 0,
@@ -58,7 +57,7 @@ export const Slider = ({
     }, [swiper, children]);
 
     const activeStyles =
-        "active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 z-50 place-items-center rounded-full text-white bg-dark-muted";
+        "active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 z-10 place-items-center rounded-full text-white bg-dark-muted";
 
     const inactiveStyles = "hidden";
 
@@ -66,6 +65,7 @@ export const Slider = ({
     return (
         <div className={clsx("relative")}>
             {error && <></>}
+
             {loading && (
                 <div className="flex gap-4">
                     {Array.from({ length: svp }, (_, j) => (
@@ -137,7 +137,7 @@ export const Slider = ({
                 grid={modules.includes(Grid) ? { rows: 2, fill: 'row' } : {}}
             >
                 {children?.map((slide: any, index: number) => (
-                    <SwiperSlide className="-z-10 relative w-full h-full" key={index}>
+                    <SwiperSlide className="relative w-full h-full" key={index}>
                         {slide}
                     </SwiperSlide>
                 ))}
