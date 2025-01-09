@@ -1,8 +1,10 @@
 import { Inter, Rubik } from "next/font/google";
 import { headers } from 'next/headers';
 import type { Metadata } from "next";
-import Image from "next/image";
+
 import "./globals.css";
+
+import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 
@@ -40,13 +42,16 @@ export default async function RootLayout({
       <body
         className={`${inter.variable} ${rubik.variable} antialiased bg-white text-dark transition-colors duration-200 flex flex-col gap-6`}
       >
-        {/* navigation */}
-        <Navigation />
 
-        {children}
+        <TooltipProvider>
+          {/* navigation */}
+          <Navigation />
 
-        {/* footer */}
-        <Footer />
+          {children}
+
+          {/* footer */}
+          <Footer />
+        </TooltipProvider>
       </body>
     </html>
   );
