@@ -31,3 +31,18 @@ export const productImages = [
   "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
   "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
 ];
+
+export const attributes: Record<string, string>[] = [
+  {
+    color: "obsidian",
+    storage: "256gb",
+  },
+  {
+    color: "hazel",
+    storage: "128gb",
+  },
+  {
+    color: "bay blue",
+    storage: "256gb",
+  },
+];
