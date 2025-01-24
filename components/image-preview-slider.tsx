@@ -10,6 +10,7 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
+import clsx from "clsx";
 
 export const ImagePreviewSlider = ({
     images,
@@ -18,19 +19,21 @@ export const ImagePreviewSlider = ({
     images: string[];
     alt: string;
 }) => {
+    const [previewSwiper, setPreviewSwiper] = useState<null | SwiperType>(null);
     const [swiper, setSwiper] = useState<null | SwiperType>(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
-        swiper?.on("slideChange", ({ activeIndex }) => {
-            setActiveIndex(activeIndex);
+        previewSwiper?.on("slideChange", ({ realIndex }) => {
+            setActiveIndex(realIndex);
         });
-    }, [swiper, images]);
+    }, [previewSwiper, images]);
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-4">
             <Swiper
-                className="w-full h-max"
+                className="w-full max-w-96 h-max"
+                onSwiper={setPreviewSwiper}
                 spaceBetween={16}
                 navigation
                 thumbs={{ swiper }}
@@ -52,7 +55,7 @@ export const ImagePreviewSlider = ({
             </Swiper>
 
             <Swiper
-                className="w-full h-max"
+                className="w-full max-w-96 h-max"
                 onSwiper={setSwiper}
                 spaceBetween={10}
                 slidesPerView={4.7}
@@ -62,13 +65,13 @@ export const ImagePreviewSlider = ({
             >
                 {images.map((data: any, index: number) => (
                     <SwiperSlide key={index}>
-                        <div className="relative w-full aspect-square">
+                        <div className={clsx("relative w-full aspect-square rounded-2xl", { "border border-neutral-30": activeIndex === index })}>
                             <Image
                                 src={data}
                                 alt={`${alt} Image`}
                                 fill
                                 priority
-                                className="object-contain border border-neutral-30 rounded-2xl"
+                                className="object-contain rounded-2xl"
                             />
                         </div>
                     </SwiperSlide>

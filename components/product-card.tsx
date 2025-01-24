@@ -1,12 +1,12 @@
-
+'use client'
 
 import { ShoppingBag, ShoppingCart } from 'lucide-react'
-import React from 'react'
-import { Badge } from './ui/badge'
 import Image from 'next/image'
-import { formatNumber } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 import Link from 'next/link'
+import React from 'react'
+
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
+import { formatNumber } from '@/lib/utils'
 import { routes } from '@/routes'
 
 type Props = {
@@ -37,7 +37,10 @@ const ProductCard = ({ product }: Props) => {
             <div className="absolute right-0 bottom-0 p-2 group-hover:opacity-100 opacity-0 duration-300">
                 <div className="flex flex-col items-center gap-2">
                     <Tooltip>
-                        <TooltipTrigger className='bg-dark text-white p-2 rounded-full'>
+                        <TooltipTrigger className='bg-dark text-white p-2 rounded-full' onClick={(ev => {
+                            ev.preventDefault();
+                            ev.stopPropagation()
+                        })}>
                             <ShoppingCart size={16} />
                         </TooltipTrigger>
                         <TooltipContent className='z-50'>
@@ -46,7 +49,10 @@ const ProductCard = ({ product }: Props) => {
                     </Tooltip>
 
                     <Tooltip>
-                        <TooltipTrigger className='p-2 rounded-full'>
+                        <TooltipTrigger className='p-2 rounded-full' onClick={(ev => {
+                            ev.preventDefault();
+                            ev.stopPropagation()
+                        })}>
                             <ShoppingBag size={16} />
                         </TooltipTrigger>
                         <TooltipContent>

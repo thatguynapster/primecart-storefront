@@ -40,7 +40,7 @@ const ProductVariants = ({ attributes }: Props) => {
                             ...prev,
                             [key]: value,
                         }))}
-                        className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+                        className="flex flex-wrap gap-2 w-max">
                         {getOptions(key).map(({ value, available }) => (
                             <Radio
                                 key={value}
@@ -50,7 +50,7 @@ const ProductVariants = ({ attributes }: Props) => {
                                     available
                                         ? 'cursor-pointer focus:outline-none bg-white'
                                         : 'cursor-not-allowed opacity-65 bg-dark-muted',
-                                    'flex items-center justify-center rounded-xl px-2 py-4 text-sm font-semibold uppercase border border-dark-muted hover:bg-gray-50 data-[checked]:bg-dark data-[checked]:text-white sm:flex-1 [&:not([data-focus])]:[&:not([data-checked])]:ring-inset',
+                                    'flex items-center justify-center rounded-xl p-4 text-sm font-semibold uppercase border border-dark-muted hover:bg-gray-50 data-[checked]:bg-dark data-[checked]:text-white sm:flex-1 [&:not([data-focus])]:[&:not([data-checked])]:ring-inset whitespace-nowrap w-max',
                                 )}
                             >
                                 {value}
@@ -63,7 +63,7 @@ const ProductVariants = ({ attributes }: Props) => {
             ))}
 
             {Object.keys(selectedAttributes).length > 0 &&
-                <div className="-mt-2 flex gap-2 items-center text-error" onClick={() => setSelectedAttributes({})}>
+                <div className="-mt-2 flex gap-2 items-center text-error cursor-pointer" onClick={() => setSelectedAttributes({})}>
                     <CircleX size={20} />
                     <p className="font-semibold">Clear Selection</p>
                 </div>
