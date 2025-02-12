@@ -1,3 +1,5 @@
+import { ICart } from "./lib/types";
+
 export const categories: { previewImage: string; name: string }[] = [
   {
     name: "category 1",
@@ -44,5 +46,98 @@ export const attributes: Record<string, string>[] = [
   {
     color: "bay blue",
     storage: "256gb",
+  },
+];
+
+export const cart: ICart[] = [
+  {
+    _id: "1",
+    name: "Product 1",
+    quantity: 1,
+    available_quantity: 10,
+    price: 100,
+    image: productImages[0],
+    variant: attributes[0],
+  },
+  {
+    _id: "2",
+    name: "Product 2",
+    quantity: 1,
+    available_quantity: 10,
+    price: 200,
+    image: productImages[1],
+    variant: attributes[1],
+  },
+  {
+    _id: "3",
+    name: "Product 3",
+    quantity: 1,
+    available_quantity: 10,
+    price: 300,
+    image: productImages[2],
+    variant: attributes[2],
+  },
+  {
+    _id: "4",
+    name: "Product 4",
+    quantity: 1,
+    available_quantity: 10,
+    price: 400,
+    image: productImages[3],
+    variant: attributes[0],
+  },
+  {
+    _id: "5",
+    name: "Product 5",
+    quantity: 1,
+    available_quantity: 10,
+    price: 500,
+    image: productImages[4],
+    variant: attributes[1],
+  },
+  {
+    _id: "6",
+    name: "Product 6",
+    quantity: 1,
+    available_quantity: 10,
+    price: 600,
+    image: productImages[5],
+    variant: attributes[2],
+  },
+  {
+    _id: "7",
+    name: "Product 7",
+    quantity: 1,
+    available_quantity: 10,
+    price: 700,
+    image: productImages[6],
+    variant: attributes[0],
+  },
+  {
+    _id: "8",
+    name: "Product 8",
+    quantity: 1,
+    available_quantity: 10,
+    price: 800,
+    image: productImages[7],
+    variant: attributes[1],
+  },
+  {
+    _id: "9",
+    name: "Product 9",
+    quantity: 1,
+    available_quantity: 10,
+    price: 900,
+    image: productImages[0],
+    variant: attributes[2],
+  },
+  {
+    _id: "10",
+    name: "Product 10",
+    quantity: 1,
+    available_quantity: 10,
+    price: 1000,
+    image: productImages[6],
+    variant: attributes[0],
   },
 ];

@@ -6,6 +6,8 @@ import clsx from "clsx";
 
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { routes } from "@/routes";
+import { ScrollArea } from "./ui/scroll-area";
+import Cart from "./cart";
 
 type Props = {};
 
@@ -24,32 +26,32 @@ const Navigation = async ({ }: Props) => {
           <p className="text-dark-muted text-sm font-semibold uppercase">best price guarantee</p>
         </div>
 
-        <div className="relative flex items-center justify-between">
-          <Sheet>
-            <SheetTrigger asChild>
-              <div className="lg:hidden px-4 py-2">
-                <Menu strokeWidth={1.5} />
-              </div>
-            </SheetTrigger>
+        <div className="relative flex items-center justify-between px-4">
+          {/* <Sheet>
+                <SheetTrigger asChild>
+                  <div className="lg:hidden px-4 py-2">
+                    <Menu strokeWidth={1.5} />
+                  </div>
+                </SheetTrigger>
 
-            <SheetContent side="left">
-              <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
-              <div className="mt-3 space-y-1 px-2">
-                {/* load navigation data from business' main categories */}
-                {navigation.map(({ href, name }, i) => (
-                  <Link
-                    key={name}
-                    className={clsx(
-                      "block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-                    )}
-                    {...{ href }}
-                  >
-                    {name}
-                  </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+                <SheetContent side="left">
+                  <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
+                  <div className="mt-3 space-y-1 px-2">
+                    {navigation.map(({ href, name }, i) => (
+                      <Link
+                        key={name}
+                        className={clsx(
+                          "block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
+                        )}
+                        {...{ href }}
+                      >
+                        {name}
+                      </Link>
+                    ))}
+                  </div>
+                </SheetContent>
+              </Sheet>
+          */}
 
           <Link href={routes.home} className="relative w-24 h-16">
             <Image
@@ -62,24 +64,7 @@ const Navigation = async ({ }: Props) => {
             />
           </Link>
 
-          <div className="px-4 py-2">
-            {/* <Popover>
-              <PopoverTrigger asChild className="cursor-pointer">
-                <ShoppingBag strokeWidth={1.5} />
-              </PopoverTrigger>
-
-              <PopoverContent className="w-80">
-                <div className="grid gap-4">
-                  <div className="space-y-2">
-                    <h4 className="font-medium leading-none">Dimensions</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Set the dimensions for the layer.
-                    </p>
-                  </div>
-                </div>
-              </PopoverContent>
-            </Popover> */}
-
+          <div className="px- py-2">
             <Sheet>
               <SheetTrigger asChild>
                 <div className="cursor-pointer p-2">
@@ -92,6 +77,10 @@ const Navigation = async ({ }: Props) => {
                   <SheetTitle className="sr-only">Cart</SheetTitle>
                   <SheetDescription />
                 </SheetHeader>
+
+                <ScrollArea className="mt-4 ` h-[calc(100dvh-4rem)]">
+                  <Cart />
+                </ScrollArea>
 
               </SheetContent>
             </Sheet>
