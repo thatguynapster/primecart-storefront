@@ -18,6 +18,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from './ui/phone-input'
+import { Place } from "./place";
 
 type Props = {}
 
@@ -27,7 +28,15 @@ const CheckoutForm = (props: Props) => {
         name: z.string({ message: 'Provide a name' }),
         email: z.string({ required_error: 'Provide an email' }).email({ message: 'Invalid email' }),
         phoneNumber: z.string().refine(isValidPhoneNumber, { message: "Invalid phone number" }),
-        location: z.string({ message: 'Add your location' }),
+        location: z.object({
+            address: z.string({ message: 'Provide an address' }),
+            country: z.string({}),
+            country_code: z.string({ message: 'Provide an address' }),
+            city: z.string({ message: 'Provide an address' }),
+            region: z.string({ message: 'Provide an address' }),
+            longitude: z.number({ message: 'Provide an address' }),
+            latitude: z.number({ message: 'Provide an address' }),
+        }),
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -54,7 +63,6 @@ const CheckoutForm = (props: Props) => {
                                     <FormControl>
                                         <div className="w-full flex flex-col">
                                             <Input placeholder="Eg: John Doe" {...field} />
-
                                         </div>
                                     </FormControl>
                                 </div>
@@ -101,7 +109,8 @@ const CheckoutForm = (props: Props) => {
                                 <div className='flex gap-4 items-center justify-between'>
                                     <FormLabel className='w-2/5'>Location</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Eg: Accra, Ghana" {...field} />
+                                        {/* <Input placeholder="Eg: Accra, Ghana"  {...field} value={field.value.address} /> */}
+                                        <Place {...field} value={field.value} />
                                     </FormControl>
                                 </div>
                                 {/* <FormMessage /> */}
