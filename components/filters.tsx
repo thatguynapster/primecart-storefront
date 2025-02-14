@@ -1,19 +1,22 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import queryString from 'query-string'
 import Link from 'next/link'
 import React from 'react'
 import clsx from 'clsx'
 
-import { categories } from '@/dummyData'
-import { routes } from '@/routes'
-import { useSearchParams } from 'next/navigation'
-import RangeSlider from './range-slider'
 import { constructQuery } from '@/lib/utils'
+import { categories } from '@/dummyData'
+import RangeSlider from './range-slider'
+import { Category } from '@/lib/types'
+import { routes } from '@/routes'
 
-type Props = {}
+type Props = {
+    categories: Category[]
+}
 
-const Filters = (props: Props) => {
+const Filters = ({ categories }: Props) => {
     const category = useSearchParams().get('category');
 
     return (
@@ -22,12 +25,12 @@ const Filters = (props: Props) => {
             <div className="flex flex-col gap-5">
                 <h1 className="font-rubik text-2xl font-semibold">Categories</h1>
 
-                {categories.map(({ name }, index) =>
+                {categories.map(({ id, name }, index) =>
                     <Link
                         key={index}
-                        className={clsx({ 'font-bold': name === category },
+                        className={clsx({ 'font-bold': id === category },
                             "text-xl capitalize")}
-                        href={`${routes.products.all}?${queryString.stringify({ category: name })}`}
+                        href={`${routes.products.all}?${queryString.stringify({ category: id })}`}
 
                     >
                         {name}

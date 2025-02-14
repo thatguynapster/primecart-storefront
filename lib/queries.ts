@@ -1,10 +1,30 @@
-export const getBusiness = async (name: string) => {
+import queryString from "query-string";
+
+export const getBusiness = async ({
+  domain,
+  subdomain,
+}: {
+  domain?: string;
+  subdomain?: string;
+}) => {
   try {
     console.log(
-      `fetching from: ${process.env["NEXT_PUBLIC_API_URL"]}/api/business/${name}`
+      `${
+        process.env["NEXT_PUBLIC_API_URL"]
+      }/api/business/?${queryString.stringify(
+        { domain, subdomain },
+        { skipNull: true }
+      )}`
     );
     let business = await(
-      await fetch(`${process.env["NEXT_PUBLIC_API_URL"]}/api/business/${name}`)
+      await fetch(
+        `${
+          process.env["NEXT_PUBLIC_API_URL"]
+        }/api/business/?${queryString.stringify(
+          { domain, subdomain },
+          { skipNull: true }
+        )}`
+      )
     )
       .json()
       .then((resp) => resp)
@@ -13,6 +33,7 @@ export const getBusiness = async (name: string) => {
       });
 
     return business;
+    // return "business";
   } catch (error) {
     console.log(error);
     throw new Error("Failed to get business details", { cause: error });

@@ -7,6 +7,8 @@ import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
+import { StoreProvider } from "@/providers/store";
+import { MapProvider } from "@/providers/map";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,7 +37,6 @@ export default async function RootLayout({
 
   const headersList = headers();
   const business = (await headersList).get('business')
-  console.log('business id:', business)
 
   return (
     <html lang="en">
@@ -47,7 +48,10 @@ export default async function RootLayout({
           {/* navigation */}
           <Navigation />
 
-          {children}
+
+          <StoreProvider>
+            <MapProvider>{children}</MapProvider>
+          </StoreProvider>
 
           {/* footer */}
           <Footer />

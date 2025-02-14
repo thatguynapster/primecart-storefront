@@ -1,16 +1,12 @@
-import Filters from "@/components/filters";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { categories } from "@/dummyData";
-import { routes } from "@/routes";
-import clsx from "clsx";
-import { Filter, ShoppingBag, SlidersHorizontal } from "lucide-react";
+
+import { headers } from 'next/headers';
 import type { Metadata } from "next";
-import Link from "next/link";
-import queryString from "query-string";
+
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { SlidersHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Filters from "@/components/filters";
+import { Category } from '@/lib/types';
 
 export const metadata: Metadata = {
     title: "PrimeCart",
@@ -23,12 +19,18 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const headerList = headers()
+    const business = (await headerList).get('business')
 
+    const categories: Category[] = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${business}/inventory/categories`)
+        .then(resp => resp.json())
+        .then(data => data.data)
+        .catch(error => console.log(error))
 
     return (
         <main className="flex flex-col lg:flex-row justify-items-center min-h-screen w-full max-w-3xl lg:max-w-7xl mx-auto gap-8 row-start-2 items-center sm:items-start px-2.5">
             <div className="hidden lg:flex">
-                <Filters />
+                <Filters {...{ categories }} />
             </div>
 
             <div className="flex lg:hidden w-full px-4 justify-end">
@@ -41,7 +43,7 @@ export default async function RootLayout({
                             <SheetTitle className="sr-only">Products Filters</SheetTitle>
                             <SheetDescription />
                         </SheetHeader>
-                        <Filters />
+                        <Filters {...{ categories }} />
                     </SheetContent>
                 </Sheet>
             </div>
