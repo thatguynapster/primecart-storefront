@@ -7,20 +7,21 @@ import React from 'react'
 
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 import { formatNumber } from '@/lib/utils'
+import { Product } from '@/lib/types'
 import { routes } from '@/routes'
 
 type Props = {
-    product: { id: string }
+    product: Product
 }
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product: { id, images, name, variations } }: Props) => {
     return (
-        <Link href={`${routes.products.details.replace(':product_id', product.id)}`} className='flex flex-col gap-2 border border-gray rounded-lg p-2.5 group relative cursor-pointer'>
+        <Link href={`${routes.products.details.replace(':product_id', id)}`} className='flex flex-col gap-2 border border-gray rounded-lg p-2.5 group relative cursor-pointer'>
             <div className="flex flex-col gap-2">
                 <div className="relative w-full h-28">
                     <Image
-                        src={'https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png'}
-                        alt={"Business Name Logo"}
+                        src={images[0]}
+                        alt={`${name} image`}
                         priority
                         fill
                         sizes="(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw"
@@ -28,9 +29,10 @@ const ProductCard = ({ product }: Props) => {
                     />
                 </div>
                 <div className="flex flex-col gap-2.5">
-                    <p className="text-center text-sm line-clamp-2">Product Name</p>
-                    <p className="font-semibold text-center text-sm">{formatNumber(1234.5, 'currency',
-                        'GHS', 'narrowSymbol')}</p>
+                    <p className="text-center text-sm line-clamp-2">{name}</p>
+                    <p className="font-semibold text-center text-sm">
+                        {formatNumber(variations[0].price, 'currency', 'GHS', 'narrowSymbol')}
+                    </p>
                 </div>
             </div>
 

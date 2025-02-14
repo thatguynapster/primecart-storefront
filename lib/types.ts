@@ -7,3 +7,15 @@ export type ICart = {
   image: string;
   variant: Record<string, string>;
 };
+
+export type Product = {
+  id: string;
+  name: string;
+  images: string[];
+  variations: {
+    id: string;
+    attributes: Record<string, string>;
+    quantity: number;
+    price: number;
+  }[];
+};
