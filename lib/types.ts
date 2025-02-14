@@ -9,6 +9,7 @@ export type ICart = {
 };
 
 export type Product = {
+  description: string;
   id: string;
   name: string;
   images: string[];
@@ -18,4 +19,10 @@ export type Product = {
     quantity: number;
     price: number;
   }[];
+};
+
+export type Category = {
+  id: string;
+  name: string;
+  previewImage: string;
 };

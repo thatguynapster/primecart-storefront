@@ -6,16 +6,11 @@ import Link from 'next/link';
 import React from 'react';
 import clsx from 'clsx';
 
-import { categories } from "@/dummyData";
+import { Category } from "@/lib/types";
 import { routes } from '@/routes';
 
 type Props = {}
 
-type Category = {
-    id: string
-    name: string
-    previewImage: string
-}
 
 const ProductCategories = async (props: Props) => {
     const headerList = headers()
