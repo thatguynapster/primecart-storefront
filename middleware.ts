@@ -16,6 +16,8 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
   } else {
     business = await getBusiness({ domain: hostname });
   }
+  console.log("subdomain:", subdomain);
+  console.log("domain:", hostname);
 
   // Response
   const response = NextResponse.next();
