@@ -7,8 +7,9 @@ import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { StoreProvider } from "@/providers/store";
 import { MapProvider } from "@/providers/map";
+import { Toaster } from "@/components/ui/toaster";
+import { ShoppingCartProvider } from "@/context/shopping-cart-context";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -44,18 +45,21 @@ export default async function RootLayout({
         className={`${inter.variable} ${rubik.variable} antialiased bg-white text-dark transition-colors duration-200 flex flex-col gap-6`}
       >
 
-        <TooltipProvider>
-          {/* navigation */}
-          <Navigation />
+        <ShoppingCartProvider>
+          <TooltipProvider>
+            {/* navigation */}
+            <Navigation />
 
+            <MapProvider>
+              {children}
+            </MapProvider>
 
-          <StoreProvider>
-            <MapProvider>{children}</MapProvider>
-          </StoreProvider>
+            <Toaster />
 
-          {/* footer */}
-          <Footer />
-        </TooltipProvider>
+            {/* footer */}
+            <Footer />
+          </TooltipProvider>
+        </ShoppingCartProvider>
       </body>
     </html>
   );

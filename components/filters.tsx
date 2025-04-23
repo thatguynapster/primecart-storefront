@@ -1,15 +1,14 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
+import React, { useState } from 'react'
 import queryString from 'query-string'
 import Link from 'next/link'
-import React from 'react'
 import clsx from 'clsx'
 
-import { constructQuery } from '@/lib/utils'
-import { categories } from '@/dummyData'
 import RangeSlider from './range-slider'
 import { Category } from '@/lib/types'
+import { Button } from './ui/button'
 import { routes } from '@/routes'
 
 type Props = {
@@ -18,6 +17,9 @@ type Props = {
 
 const Filters = ({ categories }: Props) => {
     const category = useSearchParams().get('category');
+    const catLen = 5
+
+    const [categoryLength, setCategoryLength] = useState(catLen)
 
     return (
         // TODO: hide the filters on small screens
@@ -25,7 +27,7 @@ const Filters = ({ categories }: Props) => {
             <div className="flex flex-col gap-5">
                 <h1 className="font-rubik text-2xl font-semibold">Categories</h1>
 
-                {categories.map(({ id, name }, index) =>
+                {categories.slice(0, categoryLength).map(({ id, name }, index) =>
                     <Link
                         key={index}
                         className={clsx({ 'font-bold': id === category },
@@ -37,6 +39,15 @@ const Filters = ({ categories }: Props) => {
                     </Link>
                 )
                 }
+
+                <Button
+                    variant={'outline'}
+                    className='w-max px-16 text-sm'
+                    onClick={() => setCategoryLength((prev) => (prev === catLen ? category?.length ?? 0 : catLen))}
+                >
+                    Show {`${categoryLength > catLen ? 'Less' : 'More'}`}
+                </Button>
+
             </div>
 
             <div className="flex flex-col gap-5">

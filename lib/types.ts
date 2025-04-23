@@ -1,5 +1,5 @@
 export type ICart = {
-  _id: string;
+  id: string;
   name: string;
   quantity: number;
   available_quantity: number;
@@ -7,6 +7,13 @@ export type ICart = {
   image: string;
   variant: Record<string, string>;
 };
+
+export interface StoreInterface {
+  cart?: ICart[];
+  instant_buy?: ICart;
+  unavailable_products?: string[];
+  missing_products?: string[];
+}
 
 export type Product = {
   description: string;
