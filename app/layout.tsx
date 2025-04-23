@@ -42,7 +42,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${rubik.variable} antialiased bg-white text-dark transition-colors duration-200 flex flex-col gap-6`}
+        className={`${inter.variable} ${rubik.variable} antialiased bg-white text-dark transition-colors duration-200`}
       >
 
         <ShoppingCartProvider>

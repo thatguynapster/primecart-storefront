@@ -29,9 +29,9 @@ const Navigation = () => {
         </div>
 
         <div className="relative flex items-center justify-between px-4">
-          <Sheet>
+          {/* <Sheet>
             <SheetTrigger asChild>
-              <div className="lg:hidden px-4 py-2">
+              <div className="lg:hidden px-4 py-2 cursor-pointer">
                 <Menu strokeWidth={1.5} />
               </div>
             </SheetTrigger>
@@ -52,7 +52,7 @@ const Navigation = () => {
                 ))}
               </div>
             </SheetContent>
-          </Sheet>
+          </Sheet> */}
 
           <Link href={routes.home} className="relative w-24 h-16">
             <Image
