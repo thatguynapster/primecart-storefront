@@ -89,7 +89,7 @@ export const Slider = ({
                         className={clsx(
                             activeStyles,
                             "right-0 md:-right-4 transition",
-                            { 'hidden': children.length < svp },
+                            { 'hidden': children?.length < svp },
                             {
                                 // [inactiveStyles]: slideConfig.isEnd || children?.length <= svp,
                                 [inactiveStyles]: slideConfig.isEnd,

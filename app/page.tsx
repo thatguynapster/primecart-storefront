@@ -5,6 +5,7 @@ import ProductCategories from "@/components/product-categories";
 import { Slider } from '@/components/products-slider';
 import ProductCard from '@/components/product-card';
 import { Product } from '@/lib/types';
+import FeaturedCategories from '@/components/featured-categories';
 
 type Props = {}
 
@@ -20,7 +21,7 @@ const Home = async ({ }: Props) => {
 
   return (
     <main className="flex flex-col justify-items-center min-h-screen w-full max-w-6xl mx-auto gap-8 row-start-2 items-center sm:items-start px-2.5">
-      <ProductCategories />
+      <FeaturedCategories />
 
       <div className="flex flex-col gap-4 w-full">
         <h1 className="text-2xl font-medium font-rubik">Most Popular Now</h1>
