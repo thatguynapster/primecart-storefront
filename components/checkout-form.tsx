@@ -2,32 +2,41 @@
 
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { zodResolver } from "@hookform/resolvers/zod"
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
-import React from 'react'
 import { z } from "zod"
 
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
+import { useShoppingCart } from "@/context/shopping-cart-context"
+import { useModal } from "@/providers/modal-provider";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from './ui/phone-input'
-import { Place } from "./place";
+import { createOrder } from "@/lib/queries"
+import useStore from "@/hooks/useStore"
+import Spinner from "./ui/spinner"
+import { Place } from "./place"
+import CustomModal from "./modal";
+import Link from "next/link";
 
 type Props = {}
 
 const CheckoutForm = (props: Props) => {
+    const { store } = useStore()
+    const { cartItems, clearCart } = useShoppingCart();
+    const { setOpen, setClose } = useModal()
 
     const formSchema = z.object({
         name: z.string({ message: 'Provide a name' }),
         email: z.string({ required_error: 'Provide an email' }).email({ message: 'Invalid email' }),
-        phoneNumber: z.string().refine(isValidPhoneNumber, { message: "Invalid phone number" }),
+        phone: z.string().refine(isValidPhoneNumber, { message: "Invalid phone number" }),
         location: z.object({
             address: z.string({ message: 'Provide an address' }),
             country: z.string({}),
@@ -40,11 +49,59 @@ const CheckoutForm = (props: Props) => {
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema)
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            phone: "",
+            location: {
+                address: "",
+                country: "",
+                country_code: "",
+                city: "",
+                region: "",
+                longitude: 0,
+                latitude: 0,
+            }
+        },
+        mode: 'onChange'
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        const order = await createOrder({
+            business_id: store.business ?? '',
+            customer: {
+                email: values.email,
+                name: values.name,
+                phone: values.phone
+            },
+            location: { ...values.location },
+            products: cartItems.map((item) => {
+                return {
+                    product_id: item.id,
+                    product_variation_id: item.variation_id,
+                    quantity: item.quantity
+                }
+            }),
+        })
+
+        console.log('order:', order)
+        form.reset()
+        setOpen(
+            <CustomModal
+                title="Order created"
+            >
+                <p className="font-semibold text-center">Continue to payment</p>
+
+                <Button className="w-max mx-auto" onClick={() => {
+                    window.open(order.sale.payment.checkout_url, '_blank')
+                    setClose()
+                }}>
+                    Pay Now
+                </Button>
+            </CustomModal>
+        )
+        clearCart()
     }
 
     return (
@@ -66,7 +123,7 @@ const CheckoutForm = (props: Props) => {
                                         </div>
                                     </FormControl>
                                 </div>
-                                {/* <FormMessage /> */}
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -81,23 +138,22 @@ const CheckoutForm = (props: Props) => {
                                         <Input placeholder="Eg: me@johndoe.com" {...field} />
                                     </FormControl>
                                 </div>
-                                {/* <FormMessage /> */}
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
                     <FormField
                         control={form.control}
-                        name="phoneNumber"
+                        name="phone"
                         render={({ field }) => (
                             <FormItem>
                                 <div className='flex gap-4 items-center justify-between'>
                                     <FormLabel className='w-2/5'>Phone Number</FormLabel>
                                     <FormControl>
-                                        {/* <Input placeholder="shadcn" {...field} /> */}
                                         <PhoneInput defaultCountry="GH" placeholder="020 123 4567" className="w-full" {...field} />
                                     </FormControl>
                                 </div>
-                                {/* <FormMessage /> */}
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -109,26 +165,41 @@ const CheckoutForm = (props: Props) => {
                                 <div className='flex gap-4 items-center justify-between'>
                                     <FormLabel className='w-2/5'>Location</FormLabel>
                                     <FormControl>
-                                        {/* <Input placeholder="Eg: Accra, Ghana"  {...field} value={field.value.address} /> */}
-                                        <Place {...field} value={field.value} />
+                                        <Place
+                                            {...field}
+                                            value={field.value}
+                                            setFieldValue={(_: string, value: z.infer<typeof formSchema>['location']) => {
+                                                form.setValue('location', value, { shouldValidate: true })
+                                            }}
+                                        />
                                     </FormControl>
                                 </div>
-                                {/* <FormMessage /> */}
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
 
                     <div className="flex justify-end">
                         <Button
+                            disabled={!form.formState.isValid || form.formState.isSubmitting}
                             type="submit"
+                            // onClick={() => {
+                            //     setOpen(
+                            //         <CustomModal
+                            //             title="Redirecting to payment"
+                            //         >
+                            //             <p className="font-semibold text-center">Redirecting to payment page...</p>
+                            //         </CustomModal>)
+                            // }}
                             className='w-full lg:w-max px-8 text-sm'
-                            onClick={() => { }}
                         >
-                            Continue
+                            {form.formState.isSubmitting ? <Spinner /> : 'Continue'}
+
                         </Button>
                     </div>
                 </form>
             </Form>
+
         </div>
     )
 }

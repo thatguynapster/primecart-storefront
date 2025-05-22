@@ -1,22 +1,19 @@
-import React from 'react'
-import { Button } from './ui/button'
-import Link from 'next/link'
 import { routes } from '@/routes'
 import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+
+import { Button } from './ui/button'
 
 type Props = {}
 
 const HeroSection = (props: Props) => {
+
     return (
         <section className="relative w-full">
             {/* Hero image */}
             <div className="relative h-[calc(100dvh-104px)] w-full">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/10 z-10" />
-                {/* <img
-                    src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3"
-                    alt="LUXE Summer Collection"
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                /> */}
                 <div className="relative w-full h-full">
                     <Image
                         src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3"

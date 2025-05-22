@@ -29,17 +29,10 @@ export function Place({
       country={country}
       id={camelCase(name)}
       onChange={(value: any) => {
-        console.log(value)
         setFieldValue?.(name, value);
         setTimeout(() => setFieldTouched?.(name, true), 500);
       }}
     >
-      {/* <Input
-        withFormik={false}
-        placeholder={placeholder}
-        defaultValue={value?.address || ""}
-        {...props}
-      /> */}
       <Input
         placeholder={placeholder}
         defaultValue={value?.address || ""}

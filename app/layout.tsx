@@ -4,12 +4,13 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import { MapProvider } from "@/providers/map";
-import { Toaster } from "@/components/ui/toaster";
 import { ShoppingCartProvider } from "@/context/shopping-cart-context";
+import { Toaster } from "@/components/ui/sonner"
+import Navigation from "@/components/navigation";
+import { MapProvider } from "@/providers/map";
+import StoreProvider from "@/context/store";
+import Footer from "@/components/footer";
+import ModalProvider from "@/providers/modal-provider";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -38,6 +39,7 @@ export default async function RootLayout({
 
   const headersList = headers();
   const business = (await headersList).get('business')
+  console.log('business:', business)
 
   return (
     <html lang="en">
@@ -45,21 +47,23 @@ export default async function RootLayout({
         className={`${inter.variable} ${rubik.variable} antialiased bg-white text-dark transition-colors duration-200`}
       >
 
-        <ShoppingCartProvider>
-          <TooltipProvider>
-            {/* navigation */}
-            <Navigation />
+        <ModalProvider>
+          <StoreProvider>
+            <ShoppingCartProvider>
+              {/* navigation */}
+              <Navigation business={business ?? ''} />
 
-            <MapProvider>
-              {children}
-            </MapProvider>
+              <MapProvider>
+                {children}
+              </MapProvider>
 
-            <Toaster />
+              <Toaster />
 
-            {/* footer */}
-            <Footer />
-          </TooltipProvider>
-        </ShoppingCartProvider>
+              {/* footer */}
+              <Footer />
+            </ShoppingCartProvider>
+          </StoreProvider>
+        </ModalProvider>
       </body>
     </html>
   );

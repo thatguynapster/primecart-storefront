@@ -1,15 +1,15 @@
 'use client'
 
-import { Menu, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
 import clsx from "clsx";
 
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useShoppingCart } from "@/context/shopping-cart-context";
+import useStore from "@/hooks/useStore";
 import { routes } from "@/routes";
-import { ScrollArea } from "./ui/scroll-area";
 import Cart from "./cart";
 
 const navigation = [
@@ -18,8 +18,23 @@ const navigation = [
   { name: "About Us", href: "#about-us", current: false },
 ];
 
-const Navigation = () => {
+const Navigation = ({ business }: { business: string }) => {
+  const [hasMounted, setHasMounted] = useState(false);
   const { cartItems } = useShoppingCart();
+  const { setStore } = useStore()
+
+  useEffect(() => {
+    setHasMounted(true);
+
+    return () => { setHasMounted(false) }
+  }, []);
+
+  useEffect(() => {
+    console.log('business - client:', business)
+    setStore({
+      business
+    })
+  }, [business])
 
   return (
     <div className="min-h-full sticky top-0 z-50 bg-white/50 glass">
@@ -29,30 +44,6 @@ const Navigation = () => {
         </div>
 
         <div className="relative flex items-center justify-between px-4">
-          {/* <Sheet>
-            <SheetTrigger asChild>
-              <div className="lg:hidden px-4 py-2 cursor-pointer">
-                <Menu strokeWidth={1.5} />
-              </div>
-            </SheetTrigger>
-
-            <SheetContent side="left">
-              <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
-              <div className="mt-3 space-y-1 px-2">
-                {navigation.map(({ href, name }, i) => (
-                  <Link
-                    key={name}
-                    className={clsx(
-                      "block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-                    )}
-                    {...{ href }}
-                  >
-                    {name}
-                  </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet> */}
 
           <Link href={routes.home} className="relative w-24 h-16">
             <Image
@@ -71,15 +62,18 @@ const Navigation = () => {
                 <div className="cursor-pointer p-2 relative">
                   <ShoppingBag strokeWidth={1.5} />
 
-                  <div className={clsx("absolute w-4 h-4 p-2.5 rounded-full bg-dark text-white top-0 right-0 flex justify-center items-center",
-                    // { 'hidden': !cartItems.length }
-                  )}>
-                    <p className="text-xs">{cartItems?.length}</p>
-                  </div>
+                  {hasMounted &&
+                    <div className={clsx("absolute w-4 h-4 p-2.5 rounded-full bg-dark text-white top-0 right-0 flex justify-center items-center",
+                      { 'hidden': !cartItems.length }
+                    )}>
+                      <p className="text-xs">{cartItems?.length}</p>
+                    </div>
+                  }
 
                 </div>
 
               </SheetTrigger>
+
               <SheetContent>
                 <SheetHeader>
                   <SheetTitle className="hidden">Cart</SheetTitle>
@@ -90,6 +84,8 @@ const Navigation = () => {
 
               </SheetContent>
             </Sheet>
+
+
           </div>
         </div>
 

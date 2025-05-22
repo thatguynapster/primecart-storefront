@@ -2,8 +2,8 @@
 
 import { ChevronRight, ShoppingBag } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import React, { } from 'react'
 import Link from 'next/link'
+import React from 'react'
 
 import { useShoppingCart } from '@/context/shopping-cart-context'
 import { ScrollArea } from './ui/scroll-area'
@@ -12,29 +12,24 @@ import { SheetClose } from './ui/sheet'
 import { Button } from './ui/button'
 import CartItem from './cart-item'
 import { routes } from '@/routes'
-
-type Props = {}
+import clsx from 'clsx'
 
 const Cart = () => {
-
     const page = usePathname()
-    console.log(page)
-
     const { cartItems, clearCart } = useShoppingCart();
-
 
     return (
         <div className="w-full max-w-lg flex flex-col gap-6 items-center">
             <div className="w-full flex justify-between gap-4">
                 <p className="text-sm">{`${cartItems.length} item${(cartItems.length == 0 || cartItems.length > 1) ? 's' : ''}`}</p>
 
-                <p className="text-sm cursor-pointer" onClick={clearCart}>Clear</p>
+                {!page.includes('checkout') && <p className="text-sm cursor-pointer" onClick={clearCart}>Clear</p>}
             </div>
 
 
             {cartItems.length > 0 ?
                 <>
-                    <ScrollArea className="flex w-full h-[calc(100dvh-9.75rem)]">
+                    <ScrollArea className={clsx("flex w-full", { "h-[calc(100dvh-9.75rem)]": !page.includes('checkout') })}>
                         <div className="flex flex-col divide-y divide-light transition-all duration-300">
                             {/* {cart.slice(0, cartLength).map((item, idx) => */}
                             {cartItems.map((item, idx) =>
@@ -44,6 +39,11 @@ const Cart = () => {
                     </ScrollArea>
 
                     <div className="w-full flex items-center justify-between gap-8">
+
+                        {page.includes('checkout') && <h1 className="hidden lg:block text-3xl">
+                            Total
+                        </h1>}
+
                         <h1 className="text-2xl font-semibold">
                             {formatNumber(cartItems.reduce((curr, acc) => (acc.price * acc.quantity) + curr, 0), 'currency', 'GHS', 'narrowSymbol')}
                         </h1>
@@ -70,11 +70,13 @@ const Cart = () => {
                     <p className="text-muted-foreground mb-6">
                         Looks like you haven't added any products to your cart yet.
                     </p>
-                    <SheetClose asChild>
-                        <Button asChild className="button-cta">
-                            <Link href={routes.products.all}>Start Shopping</Link>
-                        </Button>
-                    </SheetClose>
+                    {/* {!page.includes('checkout') &&
+                        <SheetClose asChild>
+                            <Button asChild className="button-cta">
+                                <Link href={routes.products.all}>Start Shopping</Link>
+                            </Button>
+                        </SheetClose>
+                    } */}
                 </div>
             }
         </div >

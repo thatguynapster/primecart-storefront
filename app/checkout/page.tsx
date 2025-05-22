@@ -6,7 +6,7 @@ type Props = {}
 
 const CheckoutPage = ({ }: Props) => {
     return (
-        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row-reverse gap-16 px-4">
+        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row-reverse gap-16 px-4 mb-12">
             <Cart />
 
             <CheckoutForm />

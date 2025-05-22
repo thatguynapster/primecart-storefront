@@ -1,8 +1,8 @@
 'use client'
 
 import { createContext, ReactNode, useContext, useState, useEffect } from "react";
-import { useToast } from "@/hooks/use-toast"
 import { ICart } from "@/lib/types";
+import { toast } from "sonner";
 
 interface ShoppingCartContextType {
     cartItems: ICart[];
@@ -35,8 +35,6 @@ interface ShoppingCartProviderProps {
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
-    const { toast } = useToast()
-
     const [cartItems, setCartItems] = useState<ICart[]>(() => {
         if (typeof window !== 'undefined') {
             const storedCart = localStorage.getItem(CART_STORAGE_KEY);
@@ -44,6 +42,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         }
         return [];
     });
+
     const [buyNowItem, setBuyNowItem] = useState<ICart>(() => {
         if (typeof window !== 'undefined') {
             const storedBuyNow = localStorage.getItem(CART_BUY_NOW_KEY);
@@ -92,19 +91,23 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             }
         });
 
-        toast({
-            title: "Item added to cart",
-            description: `${newItem.name} has been added to your cart.`,
-        });
+        toast("Item added to cart",
+            {
+                description: `${newItem.name} has been added to your cart.`,
+                position: "top-center"
+            }
+        );
     }
 
     function initiateBuyNow(newItem: ICart) {
         setBuyNowItem(newItem);
 
-        toast({
-            title: "Initiating instant buy",
-            description: `Redirecting to checkout to purchase ${newItem.name}`,
-        });
+        toast('Initiating instant buy',
+            {
+                description: `Redirecting to checkout to purchase ${newItem.name}`,
+                position: "top-center"
+            }
+        );
     }
 
     function removeFromCart(id: string) {
@@ -112,10 +115,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
         const itemToRemove = cartItems.find(item => item.id === id);
         if (itemToRemove) {
-            toast({
-                title: "Item removed",
-                description: `${itemToRemove.name} has been removed from your cart.`,
-            });
+            toast("Item removed",
+                {
+                    description: `${itemToRemove.name} has been removed from your cart.`,
+                    position: "top-center"
+                }
+            );
         }
     }
 
@@ -131,10 +136,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     function clearCart() {
         setCartItems([]);
-        toast({
-            title: "Cart cleared",
-            description: "All items have been removed from your cart.",
-        });
+        toast("Cart cleared",
+            {
+                description: "All items have been removed from your cart.",
+                position: "top-center"
+            }
+        );
     }
 
     return (

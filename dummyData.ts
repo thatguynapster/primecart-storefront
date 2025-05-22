@@ -1,52 +1,52 @@
 import { ICart } from "./lib/types";
 
 export const categories: { previewImage: string; name: string }[] = [
-  {
-    name: "category 1",
-    previewImage:
-      "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
-  },
-  {
-    name: "category 2",
-    previewImage:
-      "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
-  },
-  {
-    name: "category 3",
-    previewImage:
-      "https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
-  },
-  {
-    name: "category 4",
-    previewImage:
-      "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
-  },
+	{
+		name: "category 1",
+		previewImage:
+			"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	},
+	{
+		name: "category 2",
+		previewImage:
+			"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	},
+	{
+		name: "category 3",
+		previewImage:
+			"https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
+	},
+	{
+		name: "category 4",
+		previewImage:
+			"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	},
 ];
 
 export const productImages = [
-  "https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
-  "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
-  "https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
-  "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
-  "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
-  "https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
-  "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
-  "https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	"https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
+	"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	"https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
+	"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	"https://primecart-dev.thatguynapster.com/_next/image?url=https%3A%2F%2Fprimecart.s3.us-east-2.amazonaws.com%2Fproducts%2FScreenshot%20from%202024-11-06%2015-00-02.png-1733505829202.png&w=640&q=75",
+	"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
+	"https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png",
 ];
 
 export const attributes: Record<string, string>[] = [
-  {
-    color: "obsidian",
-    storage: "256gb",
-  },
-  {
-    color: "hazel",
-    storage: "128gb",
-  },
-  {
-    color: "bay blue",
-    storage: "256gb",
-  },
+	{
+		color: "obsidian",
+		storage: "256gb",
+	},
+	{
+		color: "hazel",
+		storage: "128gb",
+	},
+	{
+		color: "bay blue",
+		storage: "256gb",
+	},
 ];
 
 export const cart: ICart[] = [
@@ -58,6 +58,7 @@ export const cart: ICart[] = [
 		price: 100,
 		image: productImages[0],
 		variant: attributes[0],
+		variation_id: "",
 	},
 	{
 		id: "2",
@@ -67,6 +68,7 @@ export const cart: ICart[] = [
 		price: 200,
 		image: productImages[1],
 		variant: attributes[1],
+		variation_id: "",
 	},
 	{
 		id: "3",
@@ -76,6 +78,7 @@ export const cart: ICart[] = [
 		price: 300,
 		image: productImages[2],
 		variant: attributes[2],
+		variation_id: "",
 	},
 	{
 		id: "4",
@@ -85,6 +88,7 @@ export const cart: ICart[] = [
 		price: 400,
 		image: productImages[3],
 		variant: attributes[0],
+		variation_id: "",
 	},
 	{
 		id: "5",
@@ -94,6 +98,7 @@ export const cart: ICart[] = [
 		price: 500,
 		image: productImages[4],
 		variant: attributes[1],
+		variation_id: "",
 	},
 	{
 		id: "6",
@@ -103,6 +108,7 @@ export const cart: ICart[] = [
 		price: 600,
 		image: productImages[5],
 		variant: attributes[2],
+		variation_id: "",
 	},
 	{
 		id: "7",
@@ -112,6 +118,7 @@ export const cart: ICart[] = [
 		price: 700,
 		image: productImages[6],
 		variant: attributes[0],
+		variation_id: "",
 	},
 	{
 		id: "8",
@@ -121,6 +128,7 @@ export const cart: ICart[] = [
 		price: 800,
 		image: productImages[7],
 		variant: attributes[1],
+		variation_id: "",
 	},
 	{
 		id: "9",
@@ -130,6 +138,7 @@ export const cart: ICart[] = [
 		price: 900,
 		image: productImages[0],
 		variant: attributes[2],
+		variation_id: "",
 	},
 	{
 		id: "10",
@@ -139,5 +148,6 @@ export const cart: ICart[] = [
 		price: 1000,
 		image: productImages[6],
 		variant: attributes[0],
+		variation_id: "",
 	},
 ];

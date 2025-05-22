@@ -12,6 +12,7 @@ import { Button } from './ui/button'
 type Props = { data: ICart }
 
 const CartItem = ({ data }: Props) => {
+    console.log('cart item:', data)
     const { removeFromCart, updateQuantity } = useShoppingCart();
 
 
@@ -28,8 +29,8 @@ const CartItem = ({ data }: Props) => {
         <div className="flex items-center p-4 gap-6 group">
             <div className="w-[110px] h-[110px] relative">
                 <Image
-                    src={'https://primecart.s3.us-east-2.amazonaws.com/categories/Rectangle 109.png-1734110797092.png'}
-                    alt={"Product Image"}
+                    src={data.image}
+                    alt={`${data.name} image`}
                     priority
                     fill
                     sizes="(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw"

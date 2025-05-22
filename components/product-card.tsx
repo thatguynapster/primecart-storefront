@@ -6,7 +6,7 @@ import React, { } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 import { useShoppingCart } from '@/context/shopping-cart-context'
 import { Product, StoreInterface } from '@/lib/types'
 import useLocalStorage from '@/hooks/useLocalStorage'
@@ -35,6 +35,7 @@ const ProductCard = ({ product }: Props) => {
             image: product.images[0],
             available_quantity: product.variations[0].quantity || 10,
             variant: product.variations[0].attributes,
+            variation_id: product.variations[0].id
         });
     };
 
@@ -61,14 +62,16 @@ const ProductCard = ({ product }: Props) => {
 
             <div className="absolute right-0 bottom-0 p-2 group-hover:opacity-100 opacity-0 duration-300">
                 <div className="flex flex-col items-center gap-2">
-                    <Tooltip>
-                        <TooltipTrigger className='p-2 rounded-full' onClick={handleAddToCart}>
-                            <ShoppingBag size={16} />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Add to cart</p>
-                        </TooltipContent>
-                    </Tooltip>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger className='p-2 rounded-full' onClick={handleAddToCart}>
+                                <ShoppingBag size={16} />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Add to cart</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </div>
         </Link>
