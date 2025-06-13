@@ -39,7 +39,6 @@ export default async function RootLayout({
 
   const headersList = headers();
   const business = (await headersList).get('business')
-  console.log('business:', business)
 
   return (
     <html lang="en">

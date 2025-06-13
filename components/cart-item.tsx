@@ -12,16 +12,13 @@ import { Button } from './ui/button'
 type Props = { data: ICart }
 
 const CartItem = ({ data }: Props) => {
-    console.log('cart item:', data)
     const { removeFromCart, updateQuantity } = useShoppingCart();
-
 
     const handleRemoveFromCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
 
         removeFromCart(data.id)
-
     };
 
 

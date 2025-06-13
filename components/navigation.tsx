@@ -30,7 +30,6 @@ const Navigation = ({ business }: { business: string }) => {
   }, []);
 
   useEffect(() => {
-    console.log('business - client:', business)
     setStore({
       business
     })

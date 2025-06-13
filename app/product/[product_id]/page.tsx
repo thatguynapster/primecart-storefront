@@ -20,7 +20,6 @@ const ProductDetailsPage = async ({ params }: Props) => {
     const business = (await headerList).get('business')
 
     const product: Product = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${business}/inventory/${product_id}`).then(resp => resp.json()).then(data => data.data).catch(error => console.log(error))
-    console.log(product)
 
     const attributes = product?.variations.map(variation => variation.attributes)
 

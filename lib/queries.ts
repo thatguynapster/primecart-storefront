@@ -12,14 +12,6 @@ export const getBusiness = async ({
 	subdomain?: string;
 }) => {
 	try {
-		console.log(
-			`${
-				process.env["NEXT_PUBLIC_API_URL"]
-			}/api/business/?${queryString.stringify(
-				{ domain, subdomain },
-				{ skipNull: true }
-			)}`
-		);
 		let business = await (
 			await fetch(
 				`${
@@ -54,8 +46,6 @@ type OrderDetails = {
 };
 
 export const createOrder = async (data: OrderDetails) => {
-	console.log("order data:", data);
-
 	let order = await (
 		await fetch(`${process.env["NEXT_PUBLIC_API_URL"]}/api/orders/`, {
 			method: "POST",

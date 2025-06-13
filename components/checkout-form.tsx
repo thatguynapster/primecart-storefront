@@ -85,7 +85,6 @@ const CheckoutForm = (props: Props) => {
             }),
         })
 
-        console.log('order:', order)
         form.reset()
         setOpen(
             <CustomModal

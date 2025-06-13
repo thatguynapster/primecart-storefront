@@ -21,7 +21,6 @@ const Home = async ({ }: Props) => {
   const recent_products: Product[] = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${business}/inventory/recent_products`).then(resp => resp.json()).then(data => data.data).catch(error => console.log(error))
 
   const hasExperimentalFeatures = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/${business}/experimental_features/check`).then(resp => resp.json()).then(data => data.data).catch(error => console.log(error))
-  console.log('has experimental features:', hasExperimentalFeatures)
 
   return (
     <div className='flex flex-col gap-12'>

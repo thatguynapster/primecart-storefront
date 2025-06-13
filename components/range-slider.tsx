@@ -63,7 +63,6 @@ const RangeSlider = ({ defaultValue, max, min = 0, name }: Props) => {
                         max={maxValue}
                         value={minValue}
                         onChange={(ev) => {
-                            console.log(ev.currentTarget.value)
                             setMinValue(Number(ev.currentTarget.value));
                         }}
                     />
