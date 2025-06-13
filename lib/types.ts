@@ -74,3 +74,34 @@ export type OrderProduct = {
 	product_variation_id: string;
 	order_id: string;
 };
+
+export type StorefrontFeatures = {
+	support: {
+		deliveryPolicy: string;
+		paymentPolicy: string;
+		faq: string;
+		privacyPolicy: string;
+		UserAgreement: string;
+	};
+	contact: {
+		email: string;
+		phone: string;
+		socials: {
+			facebook: string;
+			instagram: string;
+			twitter: string;
+		};
+	};
+} | null;
+
+export type ExperimentalFeatures = {
+	heroSection: {
+		backgroundImage: string;
+		title: string;
+		subText: string;
+		cta: {
+			text: string;
+			link: string;
+		};
+	};
+} | null;

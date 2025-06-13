@@ -17,13 +17,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Slider = ({
     children,
-    loading,
-    error,
     options = { showButtons: true, offset: 0 },
 }: {
     children: ReactNode[];
-    loading: boolean;
-    error: any;
     options?: Partial<{ showButtons: boolean; offset: number; modules: string[], rows: number }>;
 }) => {
     const width = useWidth();
@@ -64,24 +60,6 @@ export const Slider = ({
 
     return (
         <div className={clsx("relative")}>
-            {error && <></>}
-
-            {loading && (
-                <div className="flex gap-4">
-                    {Array.from({ length: svp }, (_, j) => (
-                        <div
-                            key={j}
-                            className={clsx(
-                                "flex flex-col gap-2",
-                                "bg-neutral-20",
-                                "animate-pulse",
-                                "w-full h-[100px]",
-                                "rounded-2xl"
-                            )}
-                        ></div>
-                    ))}
-                </div>
-            )}
 
             {options.showButtons && (
                 <div className="absolute inset-0">

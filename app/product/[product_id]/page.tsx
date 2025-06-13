@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { formatNumber } from '@/lib/utils'
 import { Product } from '@/lib/types';
 import { routes } from '@/routes'
+import Footer from '@/components/footer';
 
 type Props = { params: Promise<{ product_id: string }> };
 
@@ -24,34 +25,38 @@ const ProductDetailsPage = async ({ params }: Props) => {
     const attributes = product?.variations.map(variation => variation.attributes)
 
     return (
-        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 px-4">
+        <div className='flex flex-col gap-12'>
+            <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 px-4">
 
-            <ImagePreviewSlider images={product?.images} alt={`${product.name} image`} />
+                <ImagePreviewSlider images={product?.images} alt={`${product.name} image`} />
 
-            <div className="w-full max-w-[493px] flex flex-col gap-5">
-                <h1 className="text-3xl truncate w-full">{product.name}</h1>
-                <h2 className="text-2xl font-semibold">
-                    {formatNumber(product.variations[0].price, 'currency', 'GHS', 'narrowSymbol')}
-                </h2>
+                <div className="w-full max-w-[493px] flex flex-col gap-5">
+                    <h1 className="text-3xl truncate w-full">{product.name}</h1>
+                    <h2 className="text-2xl font-semibold">
+                        {formatNumber(product.variations[0].price, 'currency', 'GHS', 'narrowSymbol')}
+                    </h2>
 
-                <ProductVariants {...{ attributes }} />
+                    <ProductVariants {...{ attributes }} />
 
-                <div className="flex gap-4">
-                    <Link className='w-full lg:max-w-max' href={routes.checkout}>
-                        <Button className='w-full text-sm'>Quick Purchase</Button>
-                    </Link>
-                    <Button className='w-full lg:w-max text-sm' variant={'outline'}>Add to Cart</Button>
+                    <div className="flex gap-4">
+                        <Link className='w-full lg:max-w-max' href={routes.checkout}>
+                            <Button className='w-full text-sm'>Quick Purchase</Button>
+                        </Link>
+                        <Button className='w-full lg:w-max text-sm' variant={'outline'}>Add to Cart</Button>
+                    </div>
+
+                    <Accordion type="single" collapsible defaultValue='item-1'>
+                        <AccordionItem value="item-1">
+                            <AccordionTrigger>Product Description</AccordionTrigger>
+                            <AccordionContent className='text-sm text-dark-muted'>
+                                {product.description}
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
                 </div>
-
-                <Accordion type="single" collapsible defaultValue='item-1'>
-                    <AccordionItem value="item-1">
-                        <AccordionTrigger>Product Description</AccordionTrigger>
-                        <AccordionContent className='text-sm text-dark-muted'>
-                            {product.description}
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
             </div>
+            {/* footer */}
+            <Footer />
         </div>
     )
 }

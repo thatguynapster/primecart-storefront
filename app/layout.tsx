@@ -58,9 +58,6 @@ export default async function RootLayout({
               </MapProvider>
 
               <Toaster />
-
-              {/* footer */}
-              <Footer />
             </ShoppingCartProvider>
           </StoreProvider>
         </ModalProvider>

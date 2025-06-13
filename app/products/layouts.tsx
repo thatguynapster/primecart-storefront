@@ -48,6 +48,6 @@ export default async function RootLayout({
                 </Sheet>
             </div>
             {children}
-        </main >
+        </main>
     );
 }

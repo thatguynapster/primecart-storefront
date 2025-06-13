@@ -20,10 +20,6 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
     const { addToCart } = useShoppingCart();
 
-    const router = useRouter()
-
-    const [store, setStore] = useLocalStorage<StoreInterface>(process.env.NEXT_PUBLIC_STORAGE_KEY!, {})
-
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
@@ -45,7 +41,7 @@ const ProductCard = ({ product }: Props) => {
                 <div className="relative w-full h-28">
                     <Image
                         src={product.images[0]}
-                        alt={`${name} image`}
+                        alt={`${product.name} image`}
                         priority
                         fill
                         sizes="(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw"

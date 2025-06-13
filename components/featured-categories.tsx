@@ -105,7 +105,7 @@ const FeaturedCategories = async () => {
     const layoutConfig = desktopLayoutConfig[categories.length as (3 | 4 | 5 | 6 | 7 | 8 | 9)];
 
     return (
-        <section className="py-12 md:py-16 bg-brand-gray-50 w-full">
+        <section className="py-12 md:py-16 w-full">
             <div className="container px-4 md:px-6">
 
                 <div className="grid grid-cols-2 grid-rows-2 grid-flow-col gap-4 md:grid-cols-3 md:grid-rows-3">

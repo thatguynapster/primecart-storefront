@@ -5,6 +5,7 @@ import FeaturedCategories from '@/components/featured-categories';
 import { Slider } from '@/components/products-slider';
 import ProductCard from '@/components/product-card';
 import HeroSection from '@/components/hero-section';
+import Footer from '@/components/footer';
 import { Product } from '@/lib/types';
 
 type Props = {}
@@ -23,21 +24,19 @@ const Home = async ({ }: Props) => {
   console.log('has experimental features:', hasExperimentalFeatures)
 
   return (
-    <>
+    <div className='flex flex-col gap-12'>
       {hasExperimentalFeatures &&
         <HeroSection />
       }
 
-      <main className="flex flex-col justify-items-center min-h-screen w-full max-w-3xl lg:max-w-7xl mx-auto gap-8 items-center sm:items-start">
 
+      <main className="flex flex-col justify-items-center min-h-screen w-full max-w-3xl lg:max-w-7xl mx-auto gap-8 items-center sm:items-start">
         <FeaturedCategories />
 
         {most_popular &&
           <div className="flex flex-col gap-4 w-full px-4 md:px-6">
             <h1 className="text-2xl font-medium font-rubik">Most Popular Now</h1>
             <Slider
-              loading={false}
-              error={false}
               options={{ showButtons: true, rows: 2 }}
             >
               {most_popular?.map((product, i) =>
@@ -50,8 +49,6 @@ const Home = async ({ }: Props) => {
         <div className="flex flex-col gap-4 w-full px-4 md:px-6">
           <h1 className="text-2xl font-medium font-rubik">New Items</h1>
           <Slider
-            loading={false}
-            error={false}
             options={{ showButtons: true, rows: 2 }}
           >
             {recent_products.map((product, i) =>
@@ -62,7 +59,10 @@ const Home = async ({ }: Props) => {
 
         {/* <DiscountBanner /> */}
       </main>
-    </>
+
+      {/* footer */}
+      <Footer />
+    </div>
   )
 }
 

@@ -23,15 +23,15 @@ const Filters = ({ categories }: Props) => {
 
     return (
         // TODO: hide the filters on small screens
-        <div className="flex flex-col gap-9 w-full max-w-72">
-            <div className="flex flex-col gap-5">
+        <div className="flex flex-1 flex-col gap-9 w-full max-w-72">
+            <div className="flex flex-col gap-5 w-full">
                 <h1 className="font-rubik text-2xl font-semibold">Categories</h1>
 
                 {categories.slice(0, categoryLength).map(({ id, name }, index) =>
                     <Link
                         key={index}
                         className={clsx({ 'font-bold': id === category },
-                            "text-xl capitalize")}
+                            "text-xl capitalize w-full")}
                         href={`${routes.products.all}?${queryString.stringify({ category: id })}`}
 
                     >
